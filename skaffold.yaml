@@ -1,0 +1,30 @@
+apiVersion: skaffold/v1beta2
+kind: Config
+build:
+  artifacts:
+  - image: changeme
+    context: .
+    docker: {}
+  tagPolicy:
+    envTemplate:
+      template: '{{.DOCKER_REGISTRY}}/chechiachang/serverless-jenkins-quickstart:{{.VERSION}}'
+  local: {}
+deploy:
+  kubectl: {}
+profiles:
+- name: dev
+  build:
+    artifacts:
+    - docker: {}
+    tagPolicy:
+      envTemplate:
+        template: '{{.DOCKER_REGISTRY}}/chechiachang/serverless-jenkins-quickstart:{{.DIGEST_HEX}}'
+    local: {}
+  deploy:
+    helm:
+      releases:
+      - name: serverless-jenkins-quickstart
+        chartPath: charts/serverless-jenkins-quickstart
+        setValueTemplates:
+          image.repository: '{{.DOCKER_REGISTRY}}/chechiachang/serverless-jenkins-quickstart'
+          image.tag: '{{.DIGEST_HEX}}'
