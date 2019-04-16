@@ -9,10 +9,13 @@ pipelineConfig:
         replace: true
         steps:
         - sh: echo hello world
+      prebuild:
+        steps:
+        - sh: make test
     pullRequest:
       setup:
         steps:
         - sh: echo hello-world
       build:
         steps:
-        - sh: echo hello-world
+        - sh: make build
