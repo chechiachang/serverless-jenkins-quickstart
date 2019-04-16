@@ -1,1 +1,15 @@
 buildPack: go
+pipelineConfig:
+  agent: {}
+  pipelines:
+    feature:
+      setup:
+        preSteps:
+        - sh: echo setup
+        replace: true
+        steps:
+        - sh: echo hello world
+    pullRequest:
+      setup:
+        steps:
+        - sh: echo hello world
