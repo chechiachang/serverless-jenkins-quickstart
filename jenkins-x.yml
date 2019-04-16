@@ -12,4 +12,7 @@ pipelineConfig:
     pullRequest:
       setup:
         steps:
-        - sh: echo hello world
+        - sh: echo hello-world
+      build:
+        steps:
+        - sh: echo hello-world
