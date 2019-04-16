@@ -1,0 +1,108 @@
+Step: build-step-credential-initializer-4ww4d:
+
+{"level":"warn","ts":1555407728.918015,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1555407728.919671,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-git-source-************-serverless-jenkins-pl7k4:
+
+{"level":"warn","ts":1555407730.1055121,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/backport-container-name-fix\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1555407731.9880822,"logger":"fallback-logger","caller":"git-init/main.go:99","msg":"Successfully cloned \"https://github.com/************/serverless-jenkins-quickstart\" @ \"8a3b9f368bbeaa8afcf0d121400df653be2e7bec\" in path \"/workspace/source\""}
+Step: build-step-place-tools:
+
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+9e73adc0b: No Major.Minor.Patch elements found
+time="2019-04-16T09:42:13Z" level=info msg="got "
+Using SHAs from PULL_REFS=master:dc45dd4273a706be7c0984366e802d1f1ad91f81,1:8a3b9f368bbeaa8afcf0d121400df653be2e7bec
+ran git fetch --unshallow origin 8a3b9f368bbeaa8afcf0d121400df653be2e7bec: dc45dd4273a706be7c0984366e802d1f1ad91f81: in 
+ran git checkout master in 
+ran git reset --hard dc45dd4273a706be7c0984366e802d1f1ad91f81 in 
+ran clean --force -d . in 
+ran git merge 8a3b9f368bbeaa8afcf0d121400df653be2e7bec in 
+Step: build-step-setup-step2:
+
+hello-world
+Step: build-step-build-make-linux:
+
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO15VENDOREXPERIMENT=1 go build -ldflags '' -o bin/serverless-jenkins-quickstart main.go
+Step: build-step-build-container-build:
+
+[36mINFO[0m[0000] No base image, nothing to extract            
+[36mINFO[0m[0000] cmd: EXPOSE                                  
+[36mINFO[0m[0000] Adding exposed port: 8080/tcp                
+[36mINFO[0m[0000] Using files from context: [/workspace/source/bin] 
+[36mINFO[0m[0000] Skipping unpacking as no commands require it. 
+[36mINFO[0m[0000] Taking snapshot of full filesystem...        
+[36mINFO[0m[0000] EXPOSE 8080                                  
+[36mINFO[0m[0000] cmd: EXPOSE                                  
+[36mINFO[0m[0000] Adding exposed port: 8080/tcp                
+[36mINFO[0m[0000] No files changed in this command, skipping snapshotting. 
+[36mINFO[0m[0000] ENTRYPOINT ["/serverless-jenkins-quickstart"] 
+[36mINFO[0m[0000] No files changed in this command, skipping snapshotting. 
+[36mINFO[0m[0000] Using files from context: [/workspace/source/bin] 
+[36mINFO[0m[0000] COPY ./bin/ /                                
+[36mINFO[0m[0000] Taking snapshot of files...                  
+ERROR: logging before flag.Parse: E0416 09:42:34.416876      13 metadata.go:142] while reading 'google-dockercfg' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg
+ERROR: logging before flag.Parse: E0416 09:42:34.420467      13 metadata.go:159] while reading 'google-dockercfg-url' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg-url
+2019/04/16 09:42:34 pushed blob: sha256:6a3b08504042fd042338f1b500090f49196186ecba92180faef850ea3a70399b
+2019/04/16 09:42:34 pushed blob: sha256:fcac5d87030e91e1c8fc77b46fc0fae23ff720179d6d5edb4a4482fd2c09b809
+2019/04/16 09:42:34 10.27.254.113:5000/************/serverless-jenkins-quickstart:0.0.0-SNAPSHOT-PR-1-3: digest: sha256:bde619ace2aa95e087c3859d876944fe7526b82783ce9489a5112d9a00f32da4 size: 428
+Step: build-step-build-step5:
+
+hello-world
+Step: build-step-postbuild-post-build:
+
+{"level":"info","msg":"no CVE provider running in the current ** namespace so skip adding image to be analysed","time":"2019-04-16T09:42:38Z"}
+Step: build-step-promote-make-preview:
+
+sed -i -e "s/version:.*/version: 0.0.0-SNAPSHOT-PR-1-3/" Chart.yaml
+sed -i -e "s/version:.*/version: 0.0.0-SNAPSHOT-PR-1-3/" ../*/Chart.yaml
+sed -i -e "s|repository:.*|repository: 10.27.254.113:5000\/************\/serverless-jenkins-quickstart|" values.yaml
+sed -i -e "s/tag:.*/tag: 0.0.0-SNAPSHOT-PR-1-3/" values.yaml
+echo "  version: 0.0.0-SNAPSHOT-PR-1-3" >> requirements.yaml
+** step helm build
+{"level":"warning","msg":"No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080\n","time":"2019-04-16T09:42:40Z"}
+{"level":"info","msg":"Adding missing Helm repo: chartmuseum.jenkins-x.io http://chartmuseum.jenkins-x.io\n","time":"2019-04-16T09:42:41Z"}
+{"level":"info","msg":"Successfully added Helm repository chartmuseum.jenkins-x.io.\n","time":"2019-04-16T09:42:43Z"}
+{"level":"info","msg":"Adding missing Helm repo: jenkins-x-chartmuseum:8080 http://jenkins-x-chartmuseum:8080\n","time":"2019-04-16T09:42:43Z"}
+{"level":"info","msg":"Successfully added Helm repository jenkins-x-chartmuseum:8080.\n","time":"2019-04-16T09:42:43Z"}
+Step: build-step-promote-**-preview:
+
+{"level":"info","msg":"Creating a preview","time":"2019-04-16T09:42:52Z"}
+{"level":"info","msg":"Commit author email is empty for: 392e672dcc536856122a5673e6263ab1c375ab43\n","time":"2019-04-16T09:42:55Z"}
+{"level":"info","msg":"Looking for commits in: /workspace/source/\n","time":"2019-04-16T09:42:55Z"}
+{"level":"info","msg":"Commit author email is empty for: 8a3b9f368bbeaa8afcf0d121400df653be2e7bec\n","time":"2019-04-16T09:42:55Z"}
+{"level":"info","msg":"Looking for commits in: /workspace/source/\n","time":"2019-04-16T09:42:55Z"}
+{"level":"info","msg":"Found commit author match for: ************ with email address: ************999@gmail.com\n","time":"2019-04-16T09:42:55Z"}
+{"level":"info","msg":"Created environment ************-serverless-jenkins-quickstart-pr-1\n","time":"2019-04-16T09:42:55Z"}
+{"level":"info","msg":"Namespace **-************-serverless-jenkins-quickstart-pr-1 created \n ","time":"2019-04-16T09:42:55Z"}
+{"level":"info","msg":"expose:\n  Annotations:\n    helm.sh/hook: post-install,post-upgrade\n    helm.sh/hook-delete-policy: hook-succeeded\n  config:\n    domain: 130.211.245.13.nip.io\n    exposer: Ingress\n    http: \"true\"\npreview:\n  image:\n    repository: 10.27.254.113:5000/************/serverless-jenkins-quickstart\n    tag: 0.0.0-SNAPSHOT-PR-1-3\n","time":"2019-04-16T09:42:56Z"}
+{"level":"info","msg":"Deleting and cloning the Jenkins X versions repo","time":"2019-04-16T09:42:56Z"}
+{"level":"info","msg":"Delete previous Jenkins X version repo from /builder/home/.**/jenkins-x-versions\n","time":"2019-04-16T09:42:56Z"}
+{"level":"info","msg":"Cloning the Jenkins X versions repo to /builder/home/.**/jenkins-x-versions\n","time":"2019-04-16T09:42:56Z"}
+Enumerating objects: 14, done.
+Counting objects:   7% (1/14)   Counting objects:  14% (2/14)   Counting objects:  21% (3/14)   Counting objects:  28% (4/14)   Counting objects:  35% (5/14)   Counting objects:  42% (6/14)   Counting objects:  50% (7/14)   Counting objects:  57% (8/14)   Counting objects:  64% (9/14)   Counting objects:  71% (10/14)   Counting objects:  78% (11/14)   Counting objects:  85% (12/14)   Counting objects:  92% (13/14)   Counting objects: 100% (14/14)   Counting objects: 100% (14/14), done.
+Compressing objects:   8% (1/12)   Compressing objects:  16% (2/12)   Compressing objects:  25% (3/12)   Compressing objects:  33% (4/12)   Compressing objects:  41% (5/12)   Compressing objects:  50% (6/12)   Compressing objects:  58% (7/12)   Compressing objects:  66% (8/12)   Compressing objects:  75% (9/12)   Compressing objects:  83% (10/12)   Compressing objects:  91% (11/12)   Compressing objects: 100% (12/12)   Compressing objects: 100% (12/12), done.
+Total 827 (delta 3), reused 7 (delta 2), pack-reused 813
+{"level":"warning","msg":"could not find a stable version from charts of . from /builder/home/.**/jenkins-x-versions\nFor background see: https://jenkins-x.io/architecture/version-stream/\n","time":"2019-04-16T09:42:58Z"}
+{"level":"info","msg":"Please lock this version down via the command: ** step create version pr -k charts -n .\n\n","time":"2019-04-16T09:42:58Z"}
+{"level":"info","msg":"Applying generated chart . YAML via kubectl in dir: /tmp/helm-template-workdir-766960422/preview/output\n","time":"2019-04-16T09:42:58Z"}
+{"level":"info","msg":"role.rbac.authorization.k8s.io/cleanup created\nrolebinding.rbac.authorization.k8s.io/cleanup created\nserviceaccount/cleanup created\nconfigmap/exposecontroller created\nrole.rbac.authorization.k8s.io/expose created\nrolebinding.rbac.authorization.k8s.io/expose created\nserviceaccount/expose created\ndeployment.extensions/preview-preview created\nservice/serverless-jenkins-quickstart created\n","time":"2019-04-16T09:43:00Z"}
+{"level":"info","msg":"\n","time":"2019-04-16T09:43:00Z"}
+{"level":"info","msg":"Applying Helm hook post-upgrade YAML via kubectl in file: /tmp/helm-template-workdir-766960422/preview/helmHooks/preview/charts/expose/templates/job.yaml\n","time":"2019-04-16T09:43:00Z"}
+{"level":"info","msg":"job.batch/expose created\n","time":"2019-04-16T09:43:00Z"}
+{"level":"info","msg":"\n","time":"2019-04-16T09:43:00Z"}
+{"level":"info","msg":"Waiting for helm post-upgrade hook Job expose to complete before removing it\n","time":"2019-04-16T09:43:00Z"}
+{"level":"info","msg":"Deleting helm hook sources from file: /tmp/helm-template-workdir-766960422/preview/helmHooks/preview/charts/expose/templates/job.yaml\n","time":"2019-04-16T09:43:13Z"}
+{"level":"info","msg":"job.batch \"expose\" deleted\n","time":"2019-04-16T09:43:14Z"}
+{"level":"info","msg":"Removing Kubernetes resources from older releases using selector: jenkins.io/chart-release=preview,jenkins.io/version!=0.0.0-SNAPSHOT-PR-1-3 from all pvc configmap release sa role rolebinding secret\n","time":"2019-04-16T09:43:14Z"}
+{"level":"info","msg":"Removing Kubernetes resources from older releases using selector: jenkins.io/chart-release=preview,jenkins.io/version!=0.0.0-SNAPSHOT-PR-1-3,jenkins.io/namespace=**-************-serverless-jenkins-quickstart-pr-1 from clusterrole clusterrolebinding\n","time":"2019-04-16T09:43:14Z"}
+{"level":"info","msg":"Updating PipelineActivities ************-serverless-jenkins-quickstart-pr-1-3 which has status Running\n","time":"2019-04-16T09:43:15Z"}
+{"level":"info","msg":"Preview application is now available at: http://serverless-jenkins-quickstart.**-************-serverless-jenkins-quickstart-pr-1.130.211.245.13.nip.io\n\n","time":"2019-04-16T09:43:15Z"}
+Step: build-step-source-mkdir-************-serverless-jenkins-zt87q:
+
+{"level":"warn","ts":1555407799.9746232,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1555407800.0005722,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"mkdir -p /pvc/from-build-pack/workspace\""}
+Step: build-step-source-copy-************-serverless-jenkins-zkwhm:
+
+{"level":"warn","ts":1555407800.571854,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1555407800.5891464,"logger":"fallback-logger","caller":"bash/main.go:65","msg":"Successfully executed command \"cp -r /workspace/source/. /pvc/from-build-pack/workspace\""}
