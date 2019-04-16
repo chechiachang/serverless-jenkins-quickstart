@@ -61,6 +61,9 @@ lint: vendor | $(PKGS) $(GOLINT) # ❷
 	    test -z "$$($(GOLINT) $$pkg | tee /dev/stderr)" || ret=1 ; \
 	done ; exit $$ret
 
+validate:
+	jx step validate
+
 watch:
 	reflex -r "\.go$" -R "vendor.*" make skaffold-run
 
